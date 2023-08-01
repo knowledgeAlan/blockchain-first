@@ -32,18 +32,7 @@ class Block {
 
 
     getBData(){
-        let self = this;
-        return new Promise((resolve, reject) =>{
-            let encData = this.body;
-            let decData = hex2ascii(encData);
-            let decdataInJson = JSON.parse(decData);
-            
-            if(this.height == 0){
-                resolve("This is the genesis block dude");
-            }else{
-                resolve(decdataInJson);
-            }
-        });
+
     }
 }
 

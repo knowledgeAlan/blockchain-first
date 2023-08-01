@@ -64,7 +64,7 @@ class Blockchain {
         });
     }
 
-    submitStar(address,message,signature,star){
+    submitStart(address,message,signature,star){
         let self = this;
         return new Promise(async (resolve, reject)=>{
             
@@ -145,7 +145,7 @@ class Blockchain {
 
             self.chain.forEach((block,index) =>{
                 if(block.height > 0){
-                    const previousBlock = self.chain[index - 1];
+                    const previousBlock = self.chain[indiex - 1];
                     if(block.previousBlockHash !== previousBlock.hash){
                         const errorMessage = `Block ${index} previousBlockHash set to ${block.previousBlcokHash},but actual previous block hash was ${previousBlock.hash}`;
                         errorLog.push(errorMessage);

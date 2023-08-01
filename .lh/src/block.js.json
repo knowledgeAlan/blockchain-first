@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/block.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1690770191975,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1690770208431,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,37 @@\n+const SHA256 = require('crypto-js/sha256');\n+const hex2ascii = require('hex2ascii');\n+\n+\n+\n+class Block {\n+\n+\n+    constructor(data){\n+        this.hash = null;\n+        this.height = 0;\n+        this.body = Buffer.from(JSON.stringify(data).toString(), 'hex');\n+        this.time = 0;\n+        this.previousBlock = null;\n+    }\n+\n+\n+    validate(){\n+        let self = this;\n+\n+        return new Promise((resolve, reject) => {\n+            try {\n+                const currentHash = self.hash;\n+                \n+            }catch(err){\n+                reject(err);\n+            }\n+        }); \n+    }\n+\n+\n+    getBData(){\n+\n+    }\n+}\n+\n+module.exports.Block =Block;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1690770271048,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,11 @@\n \n         return new Promise((resolve, reject) => {\n             try {\n                 const currentHash = self.hash;\n-                \n+                const newHash = SHA256(JSON.stringify(self)).toString();\n+                self.hash = currentHash;\n+                resolve(currentHash === newHash);\n             }catch(err){\n                 reject(err);\n             }\n         }); \n@@ -33,41 +35,5 @@\n \n     }\n }\n \n-module.exports.Block =Block;\n-const SHA256 = require('crypto-js/sha256');\n-const hex2ascii = require('hex2ascii');\n-\n-\n-\n-class Block {\n-\n-\n-    constructor(data){\n-        this.hash = null;\n-        this.height = 0;\n-        this.body = Buffer.from(JSON.stringify(data).toString(), 'hex');\n-        this.time = 0;\n-        this.previousBlock = null;\n-    }\n-\n-\n-    validate(){\n-        let self = this;\n-\n-        return new Promise((resolve, reject) => {\n-            try {\n-                \n-            }catch(err){\n-                reject(err);\n-            }\n-        }); \n-    }\n-\n-\n-    getBData(){\n-\n-    }\n-}\n-\n module.exports.Block =Block;\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1690770412473,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,20 @@\n     }\n \n \n     getBData(){\n-\n+        let self = this;\n+        return new Promise((resolve, reject) =>{\n+            let encData = this.body;\n+            let decData = hex2ascii(encData);\n+            let decdataInJson = JSON.parse(decData);\n+            \n+            if(this.height == 0){\n+                resolve(\"This is the genesis block dude\");\n+            }else{\n+                resolve(decdataInJson);\n+            }\n+        });\n     }\n }\n \n module.exports.Block =Block;\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1690770191975,
+            "name": "Commit-0",
+            "content": "const SHA256 = require('crypto-js/sha256');\nconst hex2ascii = require('hex2ascii');\n\n\n\nclass Block {\n\n\n    constructor(data){\n        this.hash = null;\n        this.height = 0;\n        this.body = Buffer.from(JSON.stringify(data).toString(), 'hex');\n        this.time = 0;\n        this.previousBlock = null;\n    }\n\n\n    validate(){\n        let self = this;\n\n        return new Promise((resolve, reject) => {\n            try {\n                \n            }catch(err){\n                reject(err);\n            }\n        }); \n    }\n\n\n    getBData(){\n\n    }\n}\n\nmodule.exports.Block =Block;"
+        }
+    ]
+}

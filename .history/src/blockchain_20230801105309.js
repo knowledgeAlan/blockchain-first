@@ -55,7 +55,7 @@ class Blockchain {
         });
     }
 
-    requestMessageOwnershipVerification(address){
+    requestMessageOwnnershipVerification(address){
         return new Promise((resolve)=>{
 
             let date = new Date().getTime().toString().slice(0,-3);
@@ -64,7 +64,7 @@ class Blockchain {
         });
     }
 
-    submitStar(address,message,signature,star){
+    submitStart(address,message,signature,star){
         let self = this;
         return new Promise(async (resolve, reject)=>{
             
@@ -91,7 +91,7 @@ class Blockchain {
 
             const block = self.chain.filter(block => block.hash === hash);
 
-            if(typeof block != "undefined"){
+            if(type block != "undefined"){
                 resolve(block);
             }else{
                 reject(Error("No block with hash"));
@@ -143,19 +143,19 @@ class Blockchain {
 
             let validatePromoises = [];
 
-            self.chain.forEach((block,index) =>{
+            self.chain.forEach((block,index) = >{
                 if(block.height > 0){
-                    const previousBlock = self.chain[index - 1];
+                    const previousBlock = self.chain[indiex - 1];
                     if(block.previousBlockHash !== previousBlock.hash){
                         const errorMessage = `Block ${index} previousBlockHash set to ${block.previousBlcokHash},but actual previous block hash was ${previousBlock.hash}`;
                         errorLog.push(errorMessage);
                     }
                 }
 
-                validatePromoises.push(block.validate());
+                validatePromises.push(block.validate());
             });
 
-            Promise.all(validatePromoises)
+            Promises.all(validatePromises)
                     .then(validatedBlocks =>{
                         validatedBlocks.forEach((valid,index) =>{
 
