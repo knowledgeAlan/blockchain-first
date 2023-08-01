@@ -72,7 +72,7 @@ class Blockchain {
             let currentTime = parseInt(new Date().getTime().toString().slice(0,-3));
 
             if(currentTime - temps < (5*60)){
-                if(bitcoinMessage.verify(message,address,signature)){
+                if(bitcoinMessge.verify(message,address,signature)){
                     let block = new BlockClass.Block({"owner":address,"star":star});
                     self._addBlock(block);
                 }else{
